@@ -39,7 +39,7 @@ class WeightedDirectedGraph():
         print("there are %s edges in total" % nr_es_present)
 
     def run_Floyd_Warshall(self):
-        self.A = [[[0 for k in range(self.nr_vs)] for i in range(self.nr_vs)] for j in range(self.nr_vs)]
+        self.A = [[0 for t in range(self.nr_vs)] for h in range(self.nr_vs)]
     
         #set up the base case
         for t in range(self.nr_vs):
@@ -48,23 +48,24 @@ class WeightedDirectedGraph():
                     pass
                 else:
                     if (h in self.es[t]):
-                        self.A[t][h][0] = self.ws[(t,h)]
+                        self.A[t][h] = self.ws[(t,h)]
                     else:
-                        self.A[t][h][0] = sys.maxsize
+                        self.A[t][h] = sys.maxsize
 
         #now iterate
         for k in range(1,self.nr_vs):
+            self.B = self.A[:][:]
             print("at present k= ", k, "of ", self.nr_vs-1)
             for t in range(self.nr_vs):
                 for h in range(self.nr_vs):
-                    self.A[t][h][k]=min(self.A[t][h][k-1],self.A[t][k][k-1]+self.A[k][h][k-1])
+                    self.A[t][h]=min(self.B[t][h],self.B[t][k]+self.B[k][h])
 
         for t in range(0,self.nr_vs):
-            if (self.A[t][t][self.nr_vs-1] < 0):
+            if (self.A[t][t] < 0):
                 print("there is a negative cycle!")
                 quit()
 
-        return self.A[:][:][self.nr_vs-1]
+        return self.A[:][:]
 
 if __name__ == "__main__":
     file_name =  'APSPtest1.txt'
