@@ -52,7 +52,6 @@ class WeightedDirectedGraph():
         #now iterate
         for k in range(1,self.nr_vs):
             self.B = self.A[:][:]
-            print("at present k= ", k, "of ", self.nr_vs-1)
             for t in range(self.nr_vs):
                 for h in range(self.nr_vs):
                     self.A[t][h]=min(self.B[t][h],self.B[t][k]+self.B[k][h]) #idea: use numpy and broadcasting
