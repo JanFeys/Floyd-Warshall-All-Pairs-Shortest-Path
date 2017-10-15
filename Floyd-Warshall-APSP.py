@@ -54,7 +54,7 @@ class WeightedDirectedGraph():
 
         #now iterate
         for k in range(1,self.nr_vs):
-            print("at present k= ", k, "of ", self.nr_vs)
+            print("at present k= ", k, "of ", self.nr_vs-1)
             for t in range(self.nr_vs):
                 for h in range(self.nr_vs):
                     self.A[t][h][k]=min(self.A[t][h][k-1],self.A[t][k][k-1]+self.A[k][h][k-1])
@@ -67,7 +67,7 @@ class WeightedDirectedGraph():
         return self.A[:][:][self.nr_vs-1]
 
 if __name__ == "__main__":
-    file_name =  'APSPsimpletest1.txt'
+    file_name =  'APSPtest1.txt'
     
     start = time.time()
 
@@ -87,5 +87,6 @@ if __name__ == "__main__":
         for h in range(nr_vs):
             print("from %s to %s shortest path is %s" % (t, h, shortest_paths[t][h]))
 
+    print("minimum is", min(min(shortest_paths)))
     end = time.time()
     print(end - start)
