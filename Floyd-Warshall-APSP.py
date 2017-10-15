@@ -58,7 +58,7 @@ class WeightedDirectedGraph():
             print("at present k= ", k, "of ", self.nr_vs-1)
             for t in range(self.nr_vs):
                 for h in range(self.nr_vs):
-                    self.A[t][h]=min(self.B[t][h],self.B[t][k]+self.B[k][h])
+                    self.A[t][h]=min(self.B[t][h],self.B[t][k]+self.B[k][h]) #idea: use numpy and broadcasting
 
         for t in range(0,self.nr_vs):
             if (self.A[t][t] < 0):
@@ -68,8 +68,8 @@ class WeightedDirectedGraph():
         return self.A[:][:]
 
 if __name__ == "__main__":
-    file_name =  'APSPtest1.txt'
-    
+    file_name =  'APSPtest3.txt'
+
     start = time.time()
 
     with open(file_name, 'r') as f:
